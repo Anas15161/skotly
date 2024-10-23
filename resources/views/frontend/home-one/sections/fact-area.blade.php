@@ -1,6 +1,6 @@
 <section class="fact__area">
   <div class="container">
-      <div class="fact__inner-wrap">
+      {{-- <div class="fact__inner-wrap">
           <div class="row">
               <div class="col-lg-3 col-sm-6">
                   <div class="fact__item">
@@ -27,6 +27,6 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> --}}
   </div>
 </section>

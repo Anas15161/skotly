@@ -23,8 +23,8 @@
                         </div>
                         </p>
 
-                        <form method="POST" action="{{ route('become-instructor.create') }}" class="account__form" enctype="multipart/form-data">
-                            @csrf
+                        {{-- <form method="POST" action="{{ route('become-instructor.create') }}" class="account__form" enctype="multipart/form-data">
+                            @csrf --}}
 
                             @if ($instructorRequestSetting?->need_certificate == 1)
                             <div class="from-group mb-3">
@@ -69,6 +69,8 @@
                                 <textarea name="extra_information" placeholder="{{ __('Extra Information') }}" id="extra_information"></textarea>
                             </div> --}}
 
+                        <form method="POST" action="{{ route('become-instructor.create') }}" class="account__form" enctype="multipart/form-data">
+                            @csrf
                             <div class="col-md-12">
                                 <div class="form-grp">
                                     <label for="fast-name">{{ __('Full Name') }}</label>
@@ -94,7 +96,7 @@
 
                             <div class="form-group my-3">
                                 <label for="city">{{ __('courseform') }}</label>
-                                <select class="select2 form-group category" name="category" multiple>
+                                <select class="select2 form-group category" name="category[]" multiple>
                                     <option value="">{{ __('Category') }}</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
@@ -106,7 +108,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="school_level bold">{{ __('levelss') }}</label>
-                                <select name="school_level" id="school_level" class="select2 form-group category" multiple>
+                                <select name="school_level[]" id="school_level" class="select2 form-group category" multiple>
                                     <option value="">{{ __('Choisir le cycle') }}</option>
                                     @foreach($schoolLevels as $schoolLevel)
                                         <option value="{{ $schoolLevel->id }}">

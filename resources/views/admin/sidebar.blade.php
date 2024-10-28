@@ -72,6 +72,14 @@
                 @endif
             @endif
 
+            @if(checkAdminHasPermission('instructor.request.list') || checkAdminHasPermission('customer.view') || checkAdminHasPermission('location.view'))
+            <li class="menu-header">{{ __('Manage students_In') }}</li>
+            @include('admin.reservations.sidebar')
+
+                {{-- @include('customer::sidebar') --}}
+
+            @endif
+
             @if(checkAdminHasPermission('appearance.management') || checkAdminHasPermission('section.management') || checkAdminHasPermission('footer.management') || checkAdminHasPermission('brand.managemen'))
                 <li class="menu-header">{{ __('Site Contents') }}</li>
                 @if (Module::isEnabled('SiteAppearance') && checkAdminHasPermission('appearance.management'))
@@ -98,7 +106,7 @@
                 @if (Module::isEnabled('MenuBuilder') && checkAdminHasPermission('menu.view'))
                     @include('menubuilder::sidebar')
                 @endif
-                
+
                 @if (Module::isEnabled('PageBuilder') && checkAdminHasPermission('page.management'))
                     @include('pagebuilder::sidebar')
                 @endif

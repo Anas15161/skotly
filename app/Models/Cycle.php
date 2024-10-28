@@ -17,4 +17,8 @@ class Cycle extends Model
     {
         return $this->belongsTo(SchoolLevel::class, 'school_level_id');
     }
+    public function reservations()
+    {
+        return $this->belongsToMany(Reservation::class, 'cycle_reservation', 'cycle_id', 'reservation_id');
+    }
 }

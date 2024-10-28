@@ -33,7 +33,7 @@
                     {!! clean(processText($aboutSection->translation?->description)) !!}
 
                     <div class="tg-button-wrap">
-                        <a href="{{ $aboutSection?->button_url }}"
+                        <a href="{{ route('courssoutien') }}"
                             class="btn arrow-btn">{{ $aboutSection->translation?->button_text }} <img
                                 src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img"
                                 class="injectable"></a>

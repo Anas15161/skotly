@@ -1,15 +1,17 @@
 <?php
 
 namespace Modules\Course\app\Models;
-
+use Modules\InstructorRequest\app\Models\InstructorRequest;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CourseCategory extends Model {
     use HasFactory;
+    protected $table = 'course_categories';
 
     /**
      * The attributes that are mass assignable.
@@ -64,5 +66,9 @@ class CourseCategory extends Model {
         }
 
         return $courses;
+    }
+    public function instructorRequests(): BelongsToMany
+    {
+        return $this->belongsToMany(InstructorRequest::class, 'category_instructor_request', 'course_category_id', 'instructor_request_id');
     }
 }

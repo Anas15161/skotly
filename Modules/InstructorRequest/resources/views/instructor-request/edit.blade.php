@@ -31,19 +31,17 @@
 
                                 <p class="title">{{ __('Joined') }} : {{ $user->created_at->format('h:iA, d M Y') }}</p>
 
-
                                 @if ($user->email_verified_at)
-                                    <p class="title">{{ __('Email verified') }} : <b>{{ __('Yes') }}</b> </p>
+                                    <p class="title">{{ __('Email verified') }} : <b>{{ __('Yes') }}</b></p>
                                 @else
-                                    <p class="title">{{ __('Email verified') }} : <b>{{ __('NO') }}</b> </p>
+                                    <p class="title">{{ __('Email verified') }} : <b>{{ __('NO') }}</b></p>
                                 @endif
-
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-9">
-                        {{-- information card area --}}
+                        {{-- Instructor Information --}}
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="service_card">{{ __('Informations') }}</h5>
@@ -63,35 +61,62 @@
                                                 @endif
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td><b>{{ __('Phone') }}</b></td>
+                                            <td>{{ $instructorRequest->phone }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ __('City') }}</b></td>
+                                            <td>{{ $instructorRequest->city }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ __('Matières à enseigner') }}</b></td>
+                                            <td>
+                                                @if ($instructorRequest->categories->isNotEmpty())
+                                                    @foreach($instructorRequest->categories as $category)
+                                                        {{ $category->translation?->name }}{{ !$loop->last ? ', ' : '' }}
+                                                    @endforeach
+                                                @else
+                                                    {{ __('pas de matière spécifiée') }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>{{ __('Cycle scolaire à enseigner') }}</b></td>
+                                            <td>
+                                                @if ($instructorRequest->schoolLevels->isNotEmpty())
+                                                    @foreach($instructorRequest->schoolLevels as $level)
+                                                        {{ $level->slug }}{{ !$loop->last ? ', ' : '' }}
+                                                    @endforeach
+                                                @else
+                                                    {{ __('No school level specified') }}
+                                                @endif
+                                            </td>
+                                        </tr>
                                         @if ($instructorRequest->certificate)
                                             <tr>
                                                 <td><b>{{ __('Certificate / Document') }}</b></td>
-                                                <td><a target="_blank" href="{{ asset($instructorRequest->certificate) }}"
-                                                        class="btn btn-primary">{{ __('Download') }}</a></td>
+                                                <td><a target="_blank" href="{{ asset($instructorRequest->certificate) }}" class="btn btn-primary">{{ __('Download') }}</a></td>
                                             </tr>
                                         @endif
-
                                         @if ($instructorRequest->identity_scan)
                                             <tr>
                                                 <td><b>{{ __('Identity Scan') }}</b></td>
-                                                <td><a target="_blank"
-                                                        href="{{ asset($instructorRequest->identity_scan) }}"
-                                                        class="btn btn-primary">{{ __('Download') }}</a></td>
+                                                <td><a target="_blank" href="{{ asset($instructorRequest->identity_scan) }}" class="btn btn-primary">{{ __('Download') }}</a></td>
                                             </tr>
                                         @endif
-
                                         <tr>
                                             <td><b>{{ __('Extra Informations') }}</b></td>
                                             <td>{{ $instructorRequest->extra_information }}</td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
 
-                        {{-- Payment information card area --}}
-                        <div class="card">
+                        {{-- Payout Information --}}
+                        {{-- <div class="card">
                             <div class="card-header">
                                 <h5 class="service_card">{{ __('Payout Informations') }}</h5>
                             </div>
@@ -105,16 +130,16 @@
                                         <tr>
                                             <td><b>{{ __('Payout Details') }}</b></td>
                                             <td>{!! nl2br(clean($instructorRequest->payout_information)) !!}</td>
-                                        </tr> 
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        {{-- information card area --}}
+                        {{-- Status Update --}}
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="service_card">{{ __('Informations') }}</h5>
+                                <h5 class="service_card">{{ __('Update Status') }}</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">

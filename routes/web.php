@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Frontend\AboutPageController;
 use App\Http\Controllers\Frontend\BecomeInstructorController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -61,6 +62,7 @@ Route::group(['middleware' => 'maintenance.mode'], function () {
         Route::get('primaire', [CoursSoutienController::class, 'primaire'])->name('primaire');
         Route::get('collège', [CoursSoutienController::class, 'collège'])->name('collège');
         Route::get('lycée', [CoursSoutienController::class, 'lycée'])->name('lycée');
+        Route::post('/register', [CoursSoutienController::class, 'storeReservation'])->name('registerCour');
     });
 
     /** cart routes */
@@ -282,7 +284,13 @@ Route::group(['middleware' => 'maintenance.mode'], function () {
         Route::delete('tinymce-delete-image', [TinymceImageUploadController::class, 'destroy']);
     });
 });
-
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    Route::get('reservations', [ReservationController::class, 'index'])->name('admin.reservations.index');
+    Route::get('reservations/{id}', [ReservationController::class, 'show'])->name('admin.reservations.show');
+    Route::post('reservations', [ReservationController::class, 'store'])->name('admin.reservations.store'); // Ajoutez cette ligne
+    Route::delete('reservations/{id}', [ReservationController::class, 'destroy'])->name('admin.reservations.destroy'); // Add this line
+    Route::put('admin/reservations/{reservation}', [ReservationController::class, 'update'])->name('admin.reservations.update');
+});
 //maintenance mode route
 Route::get('/maintenance-mode', function () {
     $setting = Illuminate\Support\Facades\Cache::get('setting', null);

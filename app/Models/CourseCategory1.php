@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseCategory extends Model
+class CourseCategory1 extends Model
 {
     use HasFactory;
 
@@ -31,11 +31,11 @@ class CourseCategory extends Model
     // Relation parent/enfant pour les sous-catégories
     public function parent()
     {
-        return $this->belongsTo(CourseCategory::class, 'parent_id');
+        // return $this->belongsTo(CourseCategory::class, 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany(CourseCategory::class, 'parent_id');
+        // return $this->hasMany(CourseCategory::class, 'parent_id');
     }
 }

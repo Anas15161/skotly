@@ -31,7 +31,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admi
         Route::get('customer-edit-experience-modal/{id}', 'editExperienceModal')->name('customer-edit-experience-modal');
         Route::put('customer-experience-update/{id}', 'experienceUpdate')->name('customer-experience-update');
         Route::delete('customer-experience-destroy/{id}', 'experienceDestroy')->name('customer-experience-destroy');
-        
+
         Route::get('customer-education-modal/{id}', 'educationModal')->name('customer-education-modal');
         Route::post('customer-education-store/{id}', 'educationStore')->name('customer-education-store');
         Route::get('customer-edit-education-modal/{id}', 'editEducationModal')->name('customer-edit-education-modal');
